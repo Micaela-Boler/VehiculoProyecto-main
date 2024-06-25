@@ -4,31 +4,26 @@ using UnityEngine;
 
 public class DoubleShoot : Shoot
 {
+    public bool shootPowerUp;
+
 
     protected override void Attack()
     {
-        if (Input.GetMouseButtonDown(1) && activateShoot == true)
-            StartCoroutine(DoubleShootCooldown());
+        if (Input.GetMouseButtonDown(1) && activateShoot && shootPowerUp)
+            StartCoroutine(BasicShootCooldown());
     }
-    
-    
+
+
     protected override void ShootBullet(Vector3 direction, Transform shootPoint, GameObject bulletPrefab, float bulletForce)
     {
-        base.ShootBullet(transform.forward, shootPoint, bulletPrefab, shootForce);
-
+        base.ShootBullet(direction, shootPoint, bulletPrefab, bulletForce);
 
         bulletRB.AddRelativeForce(direction * bulletForce, ForceMode.Impulse);
-        //bulletRB.AddRelativeForce(direction * bulletForce / 3, ForceMode.Impulse);
-
-
-
-        bulletRB.AddForce(transform.up * shootForce / 4/*, ForceMode.Impulse*/);
-
-        bulletRB.AddForce(transform.forward * shootForce);
+        bulletRB.AddRelativeForce(transform.up * bulletForce / 4, ForceMode.Impulse);
     }
 
 
-    protected IEnumerator DoubleShootCooldown()
+    IEnumerator BasicShootCooldown()
     {
         for (int i = 0; i < shootPointsList.Count; i++)
         {
@@ -41,7 +36,5 @@ public class DoubleShoot : Shoot
 
         activateShoot = true;
     }
-
-
 }
 

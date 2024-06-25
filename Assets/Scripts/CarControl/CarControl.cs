@@ -1,20 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CarControl : MonoBehaviour
 {
     public float motorTorque = 2000;
     public float brakeTorque = 2000; //fuerza de frenado
-    public float maxSpeed = 20;
+    public float maxSpeed = 30;
     public float steeringRange = 30; // doblar rueda
     public float steeringRangeAtMaxSpeed = 10; 
     public float centreOfGravityOffset = -1f;
+    public float vInput;
+    public float hInput;
 
     WheelControl[] wheels;
     Rigidbody rigidBody;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -26,12 +29,15 @@ public class CarControl : MonoBehaviour
         wheels = GetComponentsInChildren<WheelControl>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
 
-        float vInput = Input.GetAxis("Vertical");
-        float hInput = Input.GetAxis("Horizontal");
+        // si este objeto tiene el tag de jugador if ()
+        vInput = Input.GetAxis("Vertical");
+        hInput = Input.GetAxis("Horizontal");
+        //
+
 
         // Calculate current speed in relation to the forward direction of the car
         // (this returns a negative number when traveling backwards)

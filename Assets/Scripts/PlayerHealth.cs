@@ -23,13 +23,13 @@ public class PlayerHealth : HealthAndDamage
             base.TakeDamage();
 
 
-            if (health == health / 3)
+            if (health <= 2)
             {
                 animator.SetTrigger("LowHealth");
                 particles.Play();
 
                 if (health <= 0)
-                    gameObject.GetComponent<GameManager>().ChangeScene(1);
+                    Destroy(gameObject);
             }
         }
     }

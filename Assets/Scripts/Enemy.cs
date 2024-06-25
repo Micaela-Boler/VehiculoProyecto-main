@@ -6,24 +6,22 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] protected GameObject player;
 
+    public CarControl carControl;
+
+
+
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-
-
-    void Start()
+    void Update()
     {
-        float angleRad = Mathf.Atan2(player.transform.position.y - transform.position.x, player.transform.position.x - transform.position.x);
-        float angle = (180/Mathf.PI) * angleRad;
+        transform.LookAt(player.transform.position);
 
-        transform.rotation = Quaternion.Euler(0, angle, 0);
+        carControl.hInput = 1;
+        carControl.vInput = 1;
     }
 
-
-    // rota hacia el jugador en el start y luego avanza en linea recta hacia adelante
-
-    //sigue al jugador
 
 }

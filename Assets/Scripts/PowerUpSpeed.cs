@@ -3,16 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpSpeed : PowerUp
+public class PowerUpDoubleShoot : PowerUp
 {
-    [SerializeField] private float valorAgregado;
-
-
     protected override void apply()
     {
         if (activatePowerUp == true)
-            player.GetComponent<CarControl>().motorTorque += valorAgregado;
+            player.GetComponent<DoubleShoot>().shootPowerUp = true;
         else
-            player.GetComponent<CarControl>().motorTorque -= valorAgregado;
+            player.GetComponent<DoubleShoot>().shootPowerUp = false;
     }
 }

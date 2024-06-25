@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject victoryScreen;
+    [SerializeField] GameObject player;
 
     [Header("KILLS")]
     [SerializeField] int killQuantityTarget;
@@ -21,7 +22,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         victoryScreen.SetActive(false);
+
+        player = GameObject.FindGameObjectWithTag("Player");
     }
+
+    private void Update()
+    {
+        if (player == null)
+            ChangeScene(0);
+    }
+
 
 
     public void KillCounter()

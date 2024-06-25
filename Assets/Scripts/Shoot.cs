@@ -21,7 +21,6 @@ public abstract class Shoot : MonoBehaviour
 
     [Header("ACTIVATE SHOOT")]
     protected bool activateShoot;
-    //protected bool activateDoubleShoot;
 
     [Header("COOLDOWN")]
     [SerializeField] protected float shootCooldown;
@@ -34,7 +33,6 @@ public abstract class Shoot : MonoBehaviour
     private void Start()
     {
         activateShoot = true;
-        //activateDoubleShoot = true;
     }
 
     void Update()
@@ -50,8 +48,6 @@ public abstract class Shoot : MonoBehaviour
     {
         GameObject bulletClon = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
         bulletRB = bulletClon.GetComponent<Rigidbody>();
-
-        //bulletRB.AddRelativeForce(direction * bulletForce, ForceMode.Impulse);
 
         audio.Play();
         Destroy(bulletClon, timeToDestroyBullet);

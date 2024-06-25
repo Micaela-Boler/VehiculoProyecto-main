@@ -7,15 +7,13 @@ public abstract class HealthAndDamage : MonoBehaviour
     [SerializeField] string collisionTagGameObject;
     [SerializeField] string secondCollisionTagGameObject;
 
-    [SerializeField] protected int health;
+    [SerializeField] public int health;
     [SerializeField] public int damage;
 
-    [SerializeField] GameObject gameManager;
+    [SerializeField] public GameObject gameManager;
 
     [SerializeField] protected ParticleSystem particles;
     [SerializeField] protected AudioSource audio;
-
-    //get set con el daño
 
 
     protected void Awake()
@@ -28,10 +26,14 @@ public abstract class HealthAndDamage : MonoBehaviour
         health -= damage;
     }
 
+
     protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag(collisionTagGameObject) || collision.gameObject.CompareTag(secondCollisionTagGameObject))
             TakeDamage();
+
+        if (collision.gameObject.CompareTag("DeadZone"))
+            Destroy(gameObject);
     }
     
 }

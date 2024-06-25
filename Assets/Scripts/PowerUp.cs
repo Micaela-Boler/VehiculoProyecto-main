@@ -5,8 +5,9 @@ using UnityEngine;
 public abstract class PowerUp : MonoBehaviour
 {
     [SerializeField] protected GameObject player;
+    [SerializeField] protected ParticleSystem playersParticleSystem;
 
-    [SerializeField] public bool activatePowerUp;
+    [SerializeField] public bool activatePowerUp = true;
     [SerializeField] protected int powerUpDuration;
 
     [SerializeField] protected MeshRenderer meshRenderer;
@@ -21,7 +22,7 @@ public abstract class PowerUp : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        activatePowerUp = true;
+        playersParticleSystem = player.GetComponent<ParticleSystem>();
     }
 
 
@@ -30,11 +31,13 @@ public abstract class PowerUp : MonoBehaviour
 
     protected IEnumerator powerUpDurationRoutine()
     {
+        playersParticleSystem.Play();
         activatePowerUp = true;
         apply();
 
         yield return new WaitForSeconds(powerUpDuration);
 
+        playersParticleSystem.Stop();
         activatePowerUp = false;
         apply();
 
@@ -47,7 +50,6 @@ public abstract class PowerUp : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             audio.Play();
-            particles.Play();
 
             collider.enabled = false;
             meshRenderer.enabled = false;

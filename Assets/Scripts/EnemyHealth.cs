@@ -20,13 +20,18 @@ public class EnemyHealth : HealthAndDamage
                 {
                     EnemyDrop();
 
-                    //gameObject.GetComponent<GameManager>().KillCounter();
+                    gameManager.GetComponent<GameManager>().KillCounter();
                     Destroy(gameObject);
                 }
                 break;
                 
 
-            case 1: particles.Play();
+            case 1:
+                {
+                    particles.Play();
+                    gameObject.GetComponent<EnemyAI>().enemyState = EnemyAI.EnemyState.Escaping;
+                }
+
                 break;
         }
     }
@@ -36,9 +41,6 @@ public class EnemyHealth : HealthAndDamage
         randomIndex = Random.Range(0, dropArray.Length);
         randomDrop = dropArray[randomIndex];
 
-        Instantiate(randomDrop, transform.position, Quaternion.identity);
+        Instantiate(randomDrop, transform.position, Quaternion.Euler(-90, 0, 0));
     }
-    
-    
-
 }
