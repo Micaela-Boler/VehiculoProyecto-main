@@ -6,6 +6,7 @@ public abstract class HealthAndDamage : MonoBehaviour
 {
     [SerializeField] string collisionTagGameObject;
     [SerializeField] string secondCollisionTagGameObject;
+    [SerializeField] string thirdCollisionTagGameObject;
 
     [SerializeField] public int health;
     [SerializeField] public int damage;
@@ -29,7 +30,7 @@ public abstract class HealthAndDamage : MonoBehaviour
 
     protected void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(collisionTagGameObject) || collision.gameObject.CompareTag(secondCollisionTagGameObject))
+        if (collision.gameObject.CompareTag(collisionTagGameObject) || collision.gameObject.CompareTag(secondCollisionTagGameObject) || collision.gameObject.CompareTag(secondCollisionTagGameObject))
             TakeDamage();
 
         if (collision.gameObject.CompareTag("DeadZone"))

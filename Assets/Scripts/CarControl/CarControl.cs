@@ -32,12 +32,11 @@ public class CarControl : MonoBehaviour
 
     void Update()
     {
-
-        // si este objeto tiene el tag de jugador if ()
-        vInput = Input.GetAxis("Vertical");
-        hInput = Input.GetAxis("Horizontal");
-        //
-
+        if (this.gameObject.tag == "Player")
+        {
+            vInput = Input.GetAxis("Vertical");
+            hInput = Input.GetAxis("Horizontal");
+        }
 
         // Calculate current speed in relation to the forward direction of the car
         // (this returns a negative number when traveling backwards)

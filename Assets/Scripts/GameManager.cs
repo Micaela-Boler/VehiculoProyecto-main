@@ -37,13 +37,13 @@ public class GameManager : MonoBehaviour
     public void KillCounter()
     {
         killCounter++;
-        kills.text = "Kills: " + killCounter;
+        kills.text = "Kills: " + killCounter + "/" + killQuantityTarget;
 
         if (killCounter >= killQuantityTarget)
             Win();
     }
 
-    private void Win()
+    public void Win()
     {
         victoryScreen.SetActive(true);
         Time.timeScale = 0;
